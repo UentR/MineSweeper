@@ -38,3 +38,44 @@ class Screen:
         
     def __Show(self):
         pygame.display.update()
+        
+if __name__ == "__main__":
+    from Better import Board
+    Difficulty = int(input())
+    T = Board(Difficulty)
+    Show = Screen(T.x, T.y)
+    Show(T.Grid)
+    Cell = Show.CellSize
+    
+    while True:
+        for event in pygame.event.get():
+            pass
+        keys = pygame.key.get_pressed()
+        mouse = pygame.mouse.get_pressed()
+        X, Y = pygame.mouse.get_pos()
+        X, Y = int(X//Cell), int(Y//Cell)
+        if keys[pygame.K_ESCAPE]:
+            break
+        if keys[pygame.K_DOWN]:
+            Difficulty -= 1
+            pygame.time.delay(200)
+        if keys[pygame.K_UP]:
+            Difficulty += 1
+            pygame.time.delay(200)
+        if keys[pygame.K_SPACE]:
+            pygame.quit()
+            T = Board(Difficulty)
+            Show = Screen(T.x, T.y)
+            Show(T.Grid)
+            Cell = Show.CellSize
+            pygame.time.delay(200)
+        if mouse[0]:
+            T.GuideClick(X, Y, 0)
+            Show(T.Grid)
+        if mouse[1]:
+            T.GuideClick(X, Y, 1)
+            Show(T.Grid)
+        if mouse[2]:
+            T.GuideClick(X, Y, 2)
+            Show(T.Grid)
+            pygame.time.delay(100)

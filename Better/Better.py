@@ -140,15 +140,14 @@ class Board:
         
 
 if __name__ == "__main__":
-    T = Board(10)
-    print(T.GuideClick(0, 0, 1))
-    print(T)
-    print()
-
-    x, y = int(input()), int(input())
-    T.GuideClick(x, y, 0)
-    print(T)
-
-    x, y = int(input()), int(input())
-    T.GuideClick(x, y, 1)
-    print(T)
+    T = Board(int(input()))
+    while True:
+        print(T)
+        x = int(input("x :\n"))
+        while not (0 <= x < T.x): x = int(input("x :\n"))
+        y = int(input("y :\n"))
+        while not (0 <= y < T.y): y = int(input("y :\n"))
+        type = int(input("type :\n"))
+        while not (-1 <= type <= 2): type = int(input("type :\n"))
+        if type == -1: break
+        T.GuideClick(x, y, type)
